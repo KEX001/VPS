@@ -3,239 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STORM | VX</title>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>STORM</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <style>
         :root {
-            --primary: #00f0ff;
-            --secondary: #0084ff;
-            --dark: #0a0a1a;
-            --light: #f0f0f0;
-            --success: #00ff9d;
-            --warning: #ff2d75;
-            --highlight: rgba(0, 240, 255, 0.15);
-            --glass: rgba(10, 10, 26, 0.7);
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --lighter: #ffffff;
+            --gray: #64748b;
+            --success: #10b981;
+            --warning: #ef4444;
+            --glass: rgba(15, 23, 42, 0.8);
+            --border: rgba(255, 255, 255, 0.1);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Rajdhani', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-        
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
-        
+
         body {
-            background-color: var(--dark);
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: var(--light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 1rem;
+            line-height: 1.5;
             overflow-x: hidden;
-            position: relative;
         }
-        
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-        
+
         .container {
-            width: 95%;
+            width: 100%;
             max-width: 1000px;
             background: var(--glass);
             border-radius: 16px;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 10;
-            transform: perspective(1000px);
-            transform-style: preserve-3d;
-            animation: float 6s ease-in-out infinite;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            transform: translateZ(0);
+            transition: all 0.3s ease;
         }
-        
-        @keyframes float {
-            0%, 100% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0); }
-            50% { transform: perspective(1000px) rotateX(1deg) rotateY(1deg) translateY(-10px); }
+
+        .container:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
         }
-        
+
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             padding: 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
-        
-        header::before {
+
+        header::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(
-                to bottom right,
+                90deg,
                 transparent,
-                transparent,
-                transparent,
-                rgba(255, 255, 255, 0.1)
+                rgba(255, 255, 255, 0.2),
+                transparent
             );
-            transform: rotate(30deg);
-            animation: shine 8s linear infinite;
+            animation: shine 6s infinite;
         }
-        
+
         @keyframes shine {
-            0% { transform: rotate(30deg) translate(-10%, -10%); }
-            100% { transform: rotate(30deg) translate(10%, 10%); }
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
         }
-        
+
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+            color: var(--lighter);
         }
-        
+
         .subtitle {
+            font-size: 0.95rem;
             opacity: 0.9;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            position: relative;
+            font-weight: 400;
         }
-        
+
         .content {
-            padding: 2.5rem;
+            padding: 2rem;
         }
-        
+
         .section {
             margin-bottom: 2.5rem;
             position: relative;
         }
-        
-        .section::after {
+
+        .section:not(:last-child)::after {
             content: '';
             position: absolute;
-            bottom: -1.25rem;
+            bottom: -1.5rem;
             left: 0;
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
         }
-        
+
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 600;
         }
-        
+
         .section-title svg {
-            width: 24px;
-            height: 24px;
-            filter: drop-shadow(0 0 5px var(--primary));
+            width: 22px;
+            height: 22px;
         }
-        
-        .copy-grid {
+
+        .credentials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
-        
-        .copy-box {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
+
+        .credential-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             padding: 1.5rem;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            position: relative;
+            border: 1px solid var(--border);
             transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
         }
-        
-        .copy-box:hover {
+
+        .credential-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.1);
-            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
         }
-        
-        .copy-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(0, 240, 255, 0.05),
-                transparent
-            );
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-        
-        .copy-box:hover::before {
-            transform: translateX(100%);
-        }
-        
-        .copy-box label {
+
+        .credential-card label {
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-bottom: 0.75rem;
-            opacity: 0.8;
-            letter-spacing: 0.5px;
+            color: var(--gray);
+            font-weight: 500;
         }
-        
-        .copy-content {
+
+        .credential-value {
             font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 1.1rem;
+            font-size: 1rem;
             word-break: break-all;
-            padding: 0.75rem;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
             cursor: pointer;
             user-select: all;
-            position: relative;
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--border);
         }
-        
-        .copy-content:hover {
-            background: rgba(0, 0, 0, 0.7);
-            border-color: var(--primary);
+
+        .credential-value:hover {
+            background: rgba(0, 0, 0, 0.4);
+            border-color: rgba(59, 130, 246, 0.3);
         }
-        
+
         .password {
             color: var(--warning);
-            font-weight: 600;
-            text-shadow: 0 0 5px rgba(255, 45, 117, 0.3);
+            font-weight: 500;
         }
-        
+
         .ip-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 1rem;
         }
-        
-        .ip-item {
-            background: rgba(0, 0, 0, 0.3);
+
+        .ip-card {
+            background: rgba(255, 255, 255, 0.05);
             padding: 1rem;
             border-radius: 8px;
             font-family: 'Fira Code', 'Courier New', monospace;
@@ -243,115 +202,72 @@
             cursor: pointer;
             user-select: all;
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid var(--border);
         }
-        
-        .ip-item:hover {
+
+        .ip-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
-            border-color: var(--primary);
-            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
         }
-        
-        .ip-item::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--primary);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
-        }
-        
-        .ip-item:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-        
+
         .copy-notification {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
-            transform: translateX(-50%) translateY(20px);
+            transform: translateX(-50%);
             background: var(--success);
-            color: var(--dark);
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease;
             pointer-events: none;
             z-index: 100;
-            box-shadow: 0 5px 20px rgba(0, 255, 157, 0.3);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
-        
+
         .copy-notification.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
         }
-        
+
         footer {
             text-align: center;
             margin-top: 2rem;
-            opacity: 0.7;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            position: relative;
-            z-index: 10;
+            color: var(--gray);
+            font-size: 0.85rem;
         }
-        
-        .scanline {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 240, 255, 0.03) 0%,
-                transparent 10%
-            );
-            background-size: 100% 8px;
-            pointer-events: none;
-            z-index: 1;
-            animation: scan 2s linear infinite;
-        }
-        
-        @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-        
+
         @media (max-width: 768px) {
             .container {
-                width: 100%;
                 border-radius: 0;
             }
-            
-            .copy-grid, .ip-grid {
+
+            .credentials-grid, .ip-grid {
                 grid-template-columns: 1fr;
             }
-            
+
+            .content {
+                padding: 1.5rem;
+            }
+
+            header {
+                padding: 1.5rem;
+            }
+
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div class="scanline"></div>
-    
     <div class="container">
         <header>
             <h1>VPS</h1>
-            <p class="subtitle">Advanced Security Interface v3.2.1</p>
+            <p class="subtitle">Secure credentials</p>
         </header>
         
         <div class="content">
@@ -360,18 +276,18 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
-                    Authentication Matrix
+                    Access Credentials
                 </h2>
                 
-                <div class="copy-grid">
-                    <div class="copy-box" onclick="copyToClipboard('root')">
-                        <label>USERNAME</label>
-                        <div class="copy-content">root</div>
+                <div class="credentials-grid">
+                    <div class="credential-card" onclick="copyToClipboard('root')">
+                        <label>Username</label>
+                        <div class="credential-value">root</div>
                     </div>
                     
-                    <div class="copy-box" onclick="copyToClipboard('d+s-FkV)#PDx5rR9LWZNTc')">
-                        <label>PASS</label>
-                        <div class="copy-content password">d+s-FkV)#PDx5rR9LWZNTc</div>
+                    <div class="credential-card" onclick="copyToClipboard('d+s-FkV)#PDx5rR9LWZNTc')">
+                        <label>Password</label>
+                        <div class="credential-value password">d+s-FkV)#PDx5rR9LWZNTc</div>
                     </div>
                 </div>
             </div>
@@ -381,139 +297,62 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                     </svg>
-                    VPS IP
+                    IP
                 </h2>
                 
                 <div class="ip-grid">
-                    <div class="ip-item" onclick="copyToClipboard('93.127.213.3')">93.127.213.3</div>
-                    <div class="ip-item" onclick="copyToClipboard('147.93.72.173')">147.93.72.173</div>
-                    <div class="ip-item" onclick="copyToClipboard('69.62.123.248')">69.62.123.248</div>
-                    <div class="ip-item" onclick="copyToClipboard('69.62.123.250')">69.62.123.250</div>
-                    <div class="ip-item" onclick="copyToClipboard('69.62.123.251')">69.62.123.251</div>
-                    <div class="ip-item" onclick="copyToClipboard('145.223.100.160')">145.223.100.160</div>
-                    <div class="ip-item" onclick="copyToClipboard('69.62.114.49')">69.62.114.49</div>
-                    <div class="ip-item" onclick="copyToClipboard('69.62.114.50')">69.62.114.50</div>
-                    <div class="ip-item" onclick="copyToClipboard('69.62.114.51')">69.62.114.51</div>
-                    <div class="ip-item" onclick="copyToClipboard('69.62.90.201')">69.62.90.201</div>
-                    <div class="ip-item" onclick="copyToClipboard('69.62.95.65')">69.62.95.65</div>
-                    <div class="ip-item" onclick="copyToClipboard('148.135.137.65')">148.135.137.65</div>
-                    <div class="ip-item" onclick="copyToClipboard('147.93.20.249')">147.93.20.249</div>
+                    <div class="ip-card" onclick="copyToClipboard('93.127.213.3')">93.127.213.3</div>
+                    <div class="ip-card" onclick="copyToClipboard('147.93.72.173')">147.93.72.173</div>
+                    <div class="ip-card" onclick="copyToClipboard('69.62.123.248')">69.62.123.248</div>
+                    <div class="ip-card" onclick="copyToClipboard('69.62.123.250')">69.62.123.250</div>
+                    <div class="ip-card" onclick="copyToClipboard('69.62.123.251')">69.62.123.251</div>
+                    <div class="ip-card" onclick="copyToClipboard('145.223.100.160')">145.223.100.160</div>
+                    <div class="ip-card" onclick="copyToClipboard('69.62.114.49')">69.62.114.49</div>
+                    <div class="ip-card" onclick="copyToClipboard('69.62.114.50')">69.62.114.50</div>
+                    <div class="ip-card" onclick="copyToClipboard('69.62.114.51')">69.62.114.51</div>
+                    <div class="ip-card" onclick="copyToClipboard('69.62.90.201')">69.62.90.201</div>
+                    <div class="ip-card" onclick="copyToClipboard('69.62.95.65')">69.62.95.65</div>
+                    <div class="ip-card" onclick="copyToClipboard('148.135.137.65')">148.135.137.65</div>
+                    <div class="ip-card" onclick="copyToClipboard('147.93.20.249')">147.93.20.249</div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="copy-notification" id="copyNotification">COPIED TO CLIPBOARD</div>
+    <div class="copy-notification" id="copyNotification">Copied</div>
     
     <footer>
-        <p>STORM | VX</p>
+        <p>STORM &copy; 2025 |</p>
     </footer>
     
     <script>
-        // Initialize particles.js
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#00f0ff"
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 5
-                    }
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 2,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#00f0ff",
-                    "opacity": 0.2,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1,
-                    "direction": "none",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": true,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 0.5
-                        }
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    }
-                }
-            },
-            "retina_detect": true
-        });
-        
         function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const notification = document.getElementById('copyNotification');
-                notification.classList.add('show');
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 2000);
-            });
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => showNotification());
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showNotification();
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                }
+                document.body.removeChild(textarea);
+            }
         }
-        
-        document.querySelectorAll('.copy-content, .ip-item').forEach(element => {
+
+        function showNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 1500);
+        }
+
+        document.querySelectorAll('.credential-value, .ip-card').forEach(element => {
             element.addEventListener('dblclick', (e) => {
                 e.stopPropagation();
                 const range = document.createRange();
@@ -523,16 +362,15 @@
                 selection.addRange(range);
             });
         });
-        
-        const container = document.querySelector('.container');
-        document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            container.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
-        
-        document.addEventListener('mouseleave', () => {
-            container.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+
+        document.querySelectorAll('.credential-card, .ip-card').forEach(element => {
+            element.addEventListener('touchstart', () => {
+                element.classList.add('active');
+            }, { passive: true });
+            
+            element.addEventListener('touchend', () => {
+                element.classList.remove('active');
+            }, { passive: true });
         });
     </script>
 </body>
